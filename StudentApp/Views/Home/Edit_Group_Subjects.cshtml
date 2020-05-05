@@ -1,0 +1,35 @@
+﻿@model StudentApp.Models.Group
+@using StudentApp.Models
+@{
+    ViewBag.Title = "Edit_Group_Subjects";
+}
+
+<h2>Edit_Group_Subjects</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    <fieldset>
+        <legend>Группа</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label"><b>Имя</b></div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+        </div>
+
+      
+        <div class="editor-label"><b>Курсы</b></div>
+        @foreach (Subject c in ViewBag.Subjects)
+        {
+            <input type="checkbox" name="selectedSubjects" value="@c.Id"
+                   @(Model.Subjects.Contains(c) ? "checked=\"checked\"" : "") />@c.Name <br />
+        }
+
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}

@@ -1,0 +1,26 @@
+﻿@model StudentApp.Models.Group
+@using StudentApp.Models
+@{
+    ViewBag.Title = "Group_Subjects";
+}
+
+<h2>Group_Subjects</h2>
+<fieldset>
+    <legend>Информация о группе</legend>
+
+    <div class="display-label"><b>Гурппа</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+   
+
+    <div class="display-label"><b>Предметы</b></div>
+    <ul>
+        @foreach (Subject c in Model.Subjects)
+        {
+            <li>@c.Name</li>
+        }
+    </ul>
+
+</fieldset>
