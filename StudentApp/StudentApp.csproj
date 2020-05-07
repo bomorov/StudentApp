@@ -131,9 +131,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Migrations\202005052015257_StudentDB.cs" />
     <Compile Include="Migrations\202005052015257_StudentDB.designer.cs">
       <DependentUpon>202005052015257_StudentDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005071111447_StudentDB1.cs" />
+    <Compile Include="Migrations\202005071111447_StudentDB1.designer.cs">
+      <DependentUpon>202005071111447_StudentDB1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005071726433_StudentDB2.cs" />
+    <Compile Include="Migrations\202005071726433_StudentDB2.designer.cs">
+      <DependentUpon>202005071726433_StudentDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005071834256_StudentDB3.cs" />
+    <Compile Include="Migrations\202005071834256_StudentDB3.designer.cs">
+      <DependentUpon>202005071834256_StudentDB3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Facultat.cs" />
@@ -186,13 +199,16 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Add_Student.cshtml" />
-    <Content Include="Views\Home\Student_List.cshtml" />
     <Content Include="Views\Home\Group_List.cshtml" />
     <Content Include="Views\Home\Add_Group.cshtml" />
     <Content Include="Views\Home\Add_Subject.cshtml" />
     <Content Include="Views\Home\Group_Subjects.cshtml" />
     <Content Include="Views\Home\Edit_Group_Subjects.cshtml" />
     <Content Include="Views\Home\Add_Student_Point.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\Student_List.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -210,6 +226,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202005052015257_StudentDB.resx">
       <DependentUpon>202005052015257_StudentDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071111447_StudentDB1.resx">
+      <DependentUpon>202005071111447_StudentDB1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071726433_StudentDB2.resx">
+      <DependentUpon>202005071726433_StudentDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005071834256_StudentDB3.resx">
+      <DependentUpon>202005071834256_StudentDB3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

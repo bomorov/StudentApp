@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 
+
+
 namespace StudentApp.Controllers
 {
     public class HomeController : Controller
@@ -19,12 +21,94 @@ namespace StudentApp.Controllers
         }
 
 
-       
-        public ActionResult Student_List()
+
+
+
+
+        #region
+        public ActionResult Student_List(int page = 1) ///Список студентов 
         {
-            var student = db.Students.Include(p => p.Group).Include(p=>p.Group.Facultat).Include(p=>p.Gender);
-            return View(student.ToList());
-        }  ///Список студентов
+            var students = db.Students.Include(p => p.Group).Include(p => p.Group.Facultat).Include(p => p.Gender);
+            int pageSize = 4;
+            IEnumerable<Student> studentsPerPages=students.OrderBy(x=>x.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = students.Count() };
+            IndexViewModel ivm = new IndexViewModel { PageInfo = pageInfo, Students = studentsPerPages };
+            return View(ivm);
+        }
+
+        public ActionResult Details()  ///Детальное описание студентов
+        {
+            var students = db.Students.Include(p => p.Group).Include(p => p.Group.Facultat).Include(p => p.Gender).FirstOrDefault();
+            return View(students);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)  /// Изменение данных студента
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Student student=db.Students.Find(id);
+            if (student != null)
+            {
+                SelectList groups = new SelectList(db.Groups, "Id", "Name");
+                ViewBag.Groups = groups;
+                SelectList gender = new SelectList(db.Genders, "Id", "Name");
+                ViewBag.Genders = gender;
+                return View(student);
+            }
+            return ViewBag("Student_List");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Student student)
+        {
+            db.Entry(student).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Student_List");
+        }
+
+
+        #endregion
+
+
+        public ActionResult Test(int? group, int? gender)
+        {
+            
+
+            IQueryable<Student> students = db.Students.Include(p => p.Group).Include(p => p.Group.Facultat).Include(p => p.Gender);
+            if (group != null && group != 0)
+            {
+                students = students.Where(p => p.GroupId == group);
+            }
+            if (gender != null && gender!= 0)
+            {
+                students = students.Where(p => p.GenderId == gender);
+            }
+
+            List<Group> groups = db.Groups.ToList();
+            // устанавливаем начальный элемент, который позволит выбрать всех
+            groups.Insert(0, new Group { Name = "Все", Id = 0 });
+
+            List<Gender> genders = db.Genders.ToList();
+            // устанавливаем начальный элемент, который позволит выбрать всех
+            genders.Insert(0, new Gender { Name = "Все", Id = 0 });
+
+            StudentsListViewModel plvm = new StudentsListViewModel
+            {
+                Students = students.ToList(),
+                Groups = new SelectList(groups, "Id", "Name"),
+                Genders = new SelectList(genders, "Id", "Name"),
+
+            };
+            return View(plvm);
+
+           
+        }  /// Фильтрация студентов по группам и половому признаку
+             
+       
+       
         public ActionResult Group_List()
         {
             var group = db.Groups.Include(p => p.Facultat);
@@ -48,9 +132,13 @@ namespace StudentApp.Controllers
         [HttpPost]
         public ActionResult Add_Student(Student student)
         {
-            db.Students.Add(student);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                db.Students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         #endregion
 
@@ -141,7 +229,26 @@ namespace StudentApp.Controllers
 
 
 
-        public 
+        [HttpGet]
+        public ActionResult Test(int id = 0)
+        {
+            SelectList groups = new SelectList(db.Groups, "Id", "Name");
+            ViewBag.Groups = groups;
+            SelectList gender = new SelectList(db.Genders, "Id", "Name");
+            ViewBag.Genders = gender;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Test(Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
 
 
