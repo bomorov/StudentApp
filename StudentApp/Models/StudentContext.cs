@@ -14,6 +14,7 @@ namespace StudentApp.Models
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Gender> Genders { get; set; }
+        public DbSet<User> Users { get; set; }
 
      
     }

@@ -4,6 +4,7 @@
     ViewBag.Title = "Student_List";
 }
 
+
 <h2>Students</h2>
 <table class="table">
     <tr>
@@ -16,19 +17,19 @@
     </tr>
     @foreach (var item in Model.Students)
     {
-<tr>
-    <td>@item.Name</td>
-    <td>@item.Age</td>
-    <td>@item.Gender.Name</td>
-    <td>@item.Group.Name</td>
-    <td>@item.Group.Facultat.Name</td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-        @Html.ActionLink("Details", "Details", new {  id=item.Id  }) |
-        @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
-    </td>
-</tr>
-    }
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Age</td>
+            <td>@item.Gender.Name</td>
+            <td>@item.Group.Name</td>
+            <td>@item.Group.Facultat.Name</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete","Delete_Student", new { id = item.Id })
+            </td>
+        </tr>
+        }
 </table>
 <br />
 <div class="btn-group">

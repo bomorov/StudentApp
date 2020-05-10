@@ -5,8 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-
-
+using System.EnterpriseServices;
+using System.Web.Security;
 
 namespace StudentApp.Controllers
 {
@@ -22,10 +22,13 @@ namespace StudentApp.Controllers
 
 
 
+        [Authorize]
 
 
+        
 
-        #region
+        /// Список студентов и редактировние, удаление студентов
+        #region 
         public ActionResult Student_List(int page = 1) ///Список студентов 
         {
             var students = db.Students.Include(p => p.Group).Include(p => p.Group.Facultat).Include(p => p.Gender);
@@ -69,11 +72,26 @@ namespace StudentApp.Controllers
             return RedirectToAction("Student_List");
         }
 
+        public ActionResult Delete_Student(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Student student = db.Students.Find(id);
+            if (student != null)
+            {
+                db.Students.Remove(student);
+                db.SaveChanges();
+            }
+            return ViewBag("Student_List"); 
+        }
+
 
         #endregion
 
 
-        public ActionResult Test(int? group, int? gender)
+        public ActionResult Student_Filter(int? group, int? gender)
         {
             
 
@@ -118,20 +136,24 @@ namespace StudentApp.Controllers
 
 
 
-        /// Добавление студента   
+        /// Добавление студента
         #region
         [HttpGet]
         public ActionResult Add_Student(int id = 0)
         {
             SelectList groups = new SelectList(db.Groups, "Id", "Name");
             ViewBag.Groups = groups;
-            SelectList gender = new SelectList(db.Genders, "Id", "Name");
-            ViewBag.Genders = gender;
+            SelectList genders = new SelectList(db.Genders, "Id", "Name");
+            ViewBag.Genders = genders;
             return View();
         }
         [HttpPost]
         public ActionResult Add_Student(Student student)
         {
+            if (student.Age < 15)
+            {
+                ModelState.AddModelError("Age", "Некорректный ввод");
+            }
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);
@@ -140,6 +162,8 @@ namespace StudentApp.Controllers
             }
             return View();
         }
+
+       
         #endregion
 
 
@@ -227,9 +251,25 @@ namespace StudentApp.Controllers
         }
         #endregion
 
+        [HttpPost]
+        public ActionResult StudentSearch(string name)
+        {
+           var student = db.Students.Where(a=>a.Name.Contains(name)).Include(p => p.Group).Include(p => p.Group.Facultat).Include(p => p.Gender).ToList();
+
+            if (student.Count <= 0)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(student);
+        }
+
+        public ActionResult StudentSearchTittle()
+        {
+            return View();
+        }
 
 
-        [HttpGet]
+       /* [HttpGet]
         public ActionResult Test(int id = 0)
         {
             SelectList groups = new SelectList(db.Groups, "Id", "Name");
@@ -238,18 +278,24 @@ namespace StudentApp.Controllers
             ViewBag.Genders = gender;
             return View();
         }
+
         [HttpPost]
         public ActionResult Test(Student student)
         {
+            if (student.Age < 10)
+            {
+                ModelState.AddModelError("Age", "Некорректный ввод");
+            }
             if (ModelState.IsValid)
             {
+            
                 db.Students.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
-
+        */
 
 
 

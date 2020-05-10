@@ -1,0 +1,12 @@
+﻿@{ 
+    ViewBag.Tittle = "BookSearch";
+}
+@using (Ajax.BeginForm("StudentSearch", new AjaxOptions { UpdateTargetId = "results", 
+    LoadingElementId="loading",
+    LoadingElementDuration=800,Confirm="Выполнить поиск данного студента"}))
+{
+    <input type="text" name="name"/>
+    <input type="submit" value="Поиск" />
+}
+<div id="results"></div>
+<div id="loading" style="display:none; color:blue;font-weight:bold;"<p>Загрузка...</p></div>

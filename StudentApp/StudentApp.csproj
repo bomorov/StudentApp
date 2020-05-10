@@ -124,9 +124,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Migrations\202005091629194_StudentDB4.cs" />
+    <Compile Include="Migrations\202005091629194_StudentDB4.designer.cs">
+      <DependentUpon>202005091629194_StudentDB4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005101208143_StudentDB5.cs" />
+    <Compile Include="Migrations\202005101208143_StudentDB5.designer.cs">
+      <DependentUpon>202005101208143_StudentDB5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App_Start\BundleConfig.cs" />
+    <Compile Include="Models\App_Start\FilterConfig.cs" />
+    <Compile Include="Models\App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -152,10 +161,12 @@
     <Compile Include="Models\Facultat.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentContext.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +190,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -205,10 +218,14 @@
     <Content Include="Views\Home\Group_Subjects.cshtml" />
     <Content Include="Views\Home\Edit_Group_Subjects.cshtml" />
     <Content Include="Views\Home\Add_Student_Point.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Student_List.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\StudentSearch.cshtml" />
+    <Content Include="Views\Home\StudentSearchTittle.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -236,7 +253,14 @@
     <EmbeddedResource Include="Migrations\202005071834256_StudentDB3.resx">
       <DependentUpon>202005071834256_StudentDB3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005091629194_StudentDB4.resx">
+      <DependentUpon>202005091629194_StudentDB4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005101208143_StudentDB5.resx">
+      <DependentUpon>202005101208143_StudentDB5.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

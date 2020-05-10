@@ -12,7 +12,7 @@ namespace StudentApp.Models
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Заплните поле")]
+
         [Display(Name = "Группа")]
         public string Name { get; set; }
         public int? FacultatId { get; set; }

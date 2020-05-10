@@ -34,15 +34,15 @@
         @Html.LabelFor(model => model.Gender.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.GenderId, ViewBag.Genders as SelectList, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.ValidationMessageFor(model => model.Gender.Name, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Group, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Group.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.GroupId, ViewBag.Groups as SelectList, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.ValidationMessageFor(model => model.Group.Name, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.GroupId, "", new { @class = "text-danger" })
         </div>
     </div>
 

@@ -15,15 +15,15 @@ namespace StudentApp.Models
 
 
         [Display(Name = "Имя")]
-        [Required(ErrorMessage = "Заплните поле")]
+        [Required(ErrorMessage = "Заполните поле")]
         public string Name { get; set; }
 
       
         [Display(Name = "Возраст")]
-        [Required(ErrorMessage = "Заплните поле")]
+
         public int Age { get; set; }
 
-    
+
         public int GenderId { get; set; }
      
         public Gender Gender { get; set; }
